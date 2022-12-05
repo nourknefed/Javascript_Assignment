@@ -1,9 +1,6 @@
 let choices = ["rock", "paper", "scissors"];
 let computerscores = 0;
 let playerScores = 0;
-
-
-
 function computerplay() {
   const computerSelection = choices[Math.floor(Math.random() * choices.length)];
   return computerSelection;
@@ -12,23 +9,24 @@ function computerplay() {
 // let computerSelection = computerplay();
 // let playerSelect = prompt("Choose : rock, paper, scissors");
 
-function validateUserInput(computerSelection, message) {
-  let userInput = prompt(message);
+function validateUserInput(message) {
+  let input = prompt(message);
+  let userInput = input.trim().toLowerCase();
+  let computerSelection = computerplay();
 
-  if (userInput.trim().toLowerCase() === "") {
-    return validateUserInput(computerSelection, "empty entry try agin!");
+  if (userInput === "") {
+    return validateUserInput("empty entry try agin!");
   }
-  else if (!choices.includes(userInput.trim().toLowerCase())) {
-    return validateUserInput(computerSelection, "Invalid input try again");
+  if (!choices.includes(userInput)) {
+    return validateUserInput("Invalid input try again");
   }
-  else if (userInput.trim().toLowerCase() === computerSelection) {
-    return validateUserInput(computerSelection, "No one wins, you are the same, repeat the play");
+  if (userInput === computerSelection) {
+    return validateUserInput("No one wins, you are the same, repeat the play");
   }
-
   return userInput;
 }
 
-function PlayRound(playerSelect, computerSelection) {
+function playRound(playerSelect, computerSelection) {
 
   let playerSelection = playerSelect.trim().toLowerCase();
   if (playerSelection == "rock" && computerSelection == "paper") {
@@ -57,19 +55,15 @@ function PlayRound(playerSelect, computerSelection) {
   }
 }
 
-
-
 function Game() {
   for (let i = 0; i < 5; i++) {
 
     const computerSelection = computerplay();
-    const playerSelect = validateUserInput(computerSelection, "Choose : rock, paper, scissors");
+    const playerSelect = validateUserInput("Choose : rock, paper, scissors");
 
-    PlayRound(playerSelect, computerSelection);
-    console.log(PlayRound(playerSelect, computerSelection), i);
-
+    playRound(playerSelect, computerSelection);
+    console.log(playRound(playerSelect, computerSelection), i);
   }
-
   if (playerScores > computerscores) {
     console.log(`Gungratulation🥳! You Won!`);
   }
@@ -79,49 +73,3 @@ function Game() {
 }
 
 Game();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
